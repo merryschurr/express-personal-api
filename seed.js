@@ -4,9 +4,8 @@ var personal_info = [
 {
  	name: 'Merry Schurr',
   	github_link: 'https://github.com/merryschurr/express-personal-api/blob/master/README.md',
- 	github_profile_image: 'https://infinite-oasis-61785.herokuapp.com/',
    	current_city: 'Denver',
-   	favorite_albums: ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist']
+   	favorite_shows: ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist']
 }];
 
 	var shows_list = [
@@ -64,31 +63,56 @@ var personal_info = [
     }
   ];
 
-db.Shows.remove({}, function(err, shows){
-  console.log('removed all albums');
-  showss_list.forEach(function (showsData) {
-    var shows = new db.Shows({
-      title: showsData.title,
-      releaseDate: showData.releaseDate
-    });
-    db.Actors.findOne({name: showsData.artist}, function (err, foundArtist) {
-      console.log('found actors ' + foundActors.name + ' for show ' + show.title);
-      if (err) {
-        console.log(err);
-        return;
-      }
-      // saves found Artist into album
-      shows.actors = foundArtist;
-      show.save(function(err, savedShows){
+db.Profile.remove({}, function(err, profile) {
+  console.log('remove all profile information');
+  db.Profile.create(personal_info, function(err, profile){
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log(profile);
+    console.log('recreated profile');
+    console.log("created", profile.length, "profile");
+
+  });
+});
+
+db.Actor.remove({}, function(err, actors) {
+console.log('removed all actors');
+db.Actor.create(actors_list, function(err, actors){
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log('recreated all actors');
+  console.log("created", actors.length, "actors");
+
+
+  db.Show.remove({}, function(err, shows){
+    console.log('removed all shows');
+    shows_list.forEach(function (showData) {
+      var show = new db.Show({
+        title: showData.title,
+        image: showData.image,
+        releaseDate: showData.releaseDate
+      });
+      db.Actor.findOne({name: showData.actor}, function (err, foundactor) {
+        console.log('found actor ' + foundactor.name + ' for show ' + show.title);
         if (err) {
-          return console.log(err);
-         }
-        console.log('saved ' + savedShows.title + ' by ' + foundActors.name);
-       });
+          console.log(err);
+          return;
+        }
+        show.actor = foundactor;
+        show.save(function(err, savedshow){
+          if (err) {
+            return console.log(err);
+          }
+          console.log('saved ' + savedshow.title + ' by ' + foundactor.name);
+        });
+      });
     });
-   });
- });
- 
- //   });
- // });
- 
+  });
+
+});
+});
+

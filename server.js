@@ -35,6 +35,62 @@ app.get('/', function homepage(req, res) {
  * JSON API Endpoints
  */
 
+app.get('/api/profile', function (req, res) {
+   // send all profile as JSON response
+  db.Profile.find().populate('profile')
+    .exec(function(err, profile) {
+    if (err) {
+      return console.log('index error: ' + err);
+      }
+      res.json(profile);
+      });
+});
+  
+  // get all shows
+app.get('/api/shows', function (req, res) {
+   // send all shows as JSON response
+  db.Shows.find().populate('actors')
+    .exec(function(err, shows) {
+    if (err) { return console.log("index error: " + err); }
+      res.json(shows);
+      });
+});
+
+// create new show
+app.post('/api/shows', function (req, res) {
+  var newShow = new db.Show({
+    tile: req.body.title,
+    showCover: req.body.showCover,
+    releaseDate: req.body.releaseDate,
+  });
+
+  // create actor from req.body
+  db.Actor.create({name: req.body.actor}, function(err, actor){
+    if (err) {
+      return console.log(err);
+    }
+
+    // add this actor to the shows
+    newShow.actor = actor;
+
+    // save newShow to database
+    newShow.save(function(err, show){
+      if (err) {
+        return console.log('save error: ' + err);
+      }
+      console.log('saved ', show.title);
+
+      // send back the show
+      res.json(show);
+    });
+  });
+});
+
+//HTML Endpoints
+app.get('/', function homepage(req, res) {
+  res.sendFile(__dirname + '/views/index.html');
+});
+
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
