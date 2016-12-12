@@ -11,6 +11,20 @@ var personal_info = [
  	favorite_shows: ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist']
 }];
 
+db.Profile.remove({}, function(err, profile) {
+  console.log('remove all profile information');
+  db.Profile.create(personal_info, function(err, profile){
+    if (err) {
+      console.log(err);
+      return;
+    }
+    console.log(profile);
+    console.log("profile");
+    console.log("created", profile.length, "profile");
+    process.exit();
+  });
+});
+
 var shows_list = [
 {
   title: 'Ash vs Evil Dead',
@@ -43,9 +57,18 @@ var shows_list = [
   episode: ['Season 1']
 }];
 
+db.Shows.remove({}, function(err, shows){
+  console.log('removed all shows');
+  shows_list.forEach(function (showsData) {
+    var show = new db.Show({
+      title: showData.title,
+      released: showData.releaed
+    });
+});
+
 var actors_list = [
 {
- 	name: 'Bruce Campbell',
+  name: 'Bruce Campbell',
   showsMovies: ['MallBrats', 'Dark Ascension', 'The Escort', 'Evil Dead', 'Oz the Great and Powerful', 'Tar', 'Cars 2'],
 },
 {
@@ -53,7 +76,7 @@ var actors_list = [
   showsMovies: ['Made in Dagenham', 'Heartbreaker', 'Scenes of a Sexual Nature', 'Hey Good Looking!', 'These Foolish Things', 'Enduring Love', 'Love Actually'],
 },
 {
- 	name: 'Peter Dinklage',
+  name: 'Peter Dinklage',
   showsMovies: ['The Angry Birds Movie', 'Pixels', 'Desinty', 'X-Men: Days of Future Past', 'Knights of Badassdom', 'Ice Age: Continental Drift', 'I Love You Too'],
 },
 {
@@ -66,21 +89,8 @@ var actors_list = [
 }
 ];
 
-db.Profile.remove({}, function(err, profile) {
-  console.log('remove all profile information');
-  db.Profile.create(personal_info, function(err, profile){
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(profile);
-    console.log("profile");
-    console.log("created", profile.length, "profile");
-    process.exit();
-  });
-});
 
-db.Actor.remove({}, function(err, actors) {
+db.Actors.remove({}, function(err, actors) {
 console.log('removed all actors');
 db.Actor.create(actors_list, function(err, actors){
   if (err) {
@@ -93,16 +103,7 @@ db.Actor.create(actors_list, function(err, actors){
   });
 });
 
-db.Shows.remove({}, function(err, shows){
-  console.log('removed all shows');
-  shows_list.forEach(function (showsData) {
-    var show = new db.Show({
-      title: showData.title,
-      released: showData.releaed
-    });
-});
-
-db.Actor.findOne({name: showData.actor}, function (err, foundactor) {
+db.Actors.findOne({name: showsData.actor}, function (err, foundactor) {
   console.log('found actor ' + foundactor.name + ' for show ' + show.title);
   if (err) {
     console.log(err);
