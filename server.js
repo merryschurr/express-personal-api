@@ -60,7 +60,6 @@ app.get('/api/shows', function (req, res) {
 app.post('/api/shows', function (req, res) {
   var newShow = new db.Show({
     tile: req.body.title,
-    showCover: req.body.showCover,
     releaseDate: req.body.releaseDate,
   });
 
@@ -86,6 +85,42 @@ app.post('/api/shows', function (req, res) {
   });
 });
 
+// delete show
+app.delete('/api/shows/:id', function (req, res) {
+  // get show id from url params (`req.params`)
+  console.log('shows delete', req.params);
+  var showId = req.params.id;
+  // find the index of the show we want to remove
+  db.Show.findOneAndRemove({ _id: showId }, function (err, deletedAlbum) {
+    res.json(deletedShow);
+  });
+});
+
+// add episode to existing show
+app.post('/api/albums/:show_id/episode', function (req, res) {
+  var showId = req.params.show_id;
+  db.Show.findById(showId)
+  .populate('actor')
+  .exec(function (err, foundShow){
+    console.log(foundShow);
+    // if error, return status code 500: internal server error
+    if (err) {
+      res.status(500).json("error does not compute");
+    }
+    else if (foundShow === null) {
+      res.status(404).json({newSongError: "No show found by this ID"});
+    }
+    else {
+      foundShow.characters.push(req.body);
+      foundShow.save();
+      res.status(201).json(foundShow);
+    }
+  });
+});
+
+
+
+
 //HTML Endpoints
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
@@ -101,7 +136,7 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/shows", description: "Favorite TV shows"} // CHANGE ME
+      {method: "POST", path: "/api/shows", description: "Favorite TV shows"}, // CHANGE ME
       {method: "GET", path: "/api/shows", description: "Information about my favorite shows"},
       {method: "DELETE", path: "/api/shows", description: "Delete a show from my list"},
       {method: "PUT", path: "/api/shows", description: "Correction needed?"}

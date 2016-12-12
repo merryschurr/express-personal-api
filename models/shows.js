@@ -1,12 +1,11 @@
-
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
  
-EpisodeSchema = new Schema({
+var EpisodeSchema = new Schema({
   name: String
   });
  
-var ShowSchema = new Schema({
+var ShowsSchema = new Schema({
   title: String,
   shows: {
     type: Schema.Types.ObjectId,

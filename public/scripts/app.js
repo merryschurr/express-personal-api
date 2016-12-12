@@ -1,10 +1,11 @@
 console.log("Sanity Check: JS is working!");
 var template;
+var showsList;
 var allShows = [];
 
 $(document).ready(function(){
 
-	$showsList = $('#showsTarget');
+	showsList = $('#showsTarget');
 
   // compile handlebars template
 	var source = $('#shows-template').html();
@@ -32,9 +33,31 @@ $('#newShowForm').on('submit', function(e) {
       	url: '/api/shows',
       	data: $(this).serializeArray(),
       	success: newShowSuccess,
-      	error: newShowError,
+      	error: newShowError
     	});
 	});
+
+showsList.on('click', '.deleteBtn', function() {
+    console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
+    $.ajax({
+      method: 'DELETE',
+      url: '/api/shows/'+$(this).attr('data-id'),
+      success: deleteShowSuccess,
+      error: deleteShowError
+    });
+  });
+
+ showsList.on('submit', '#addEpisodeForm', function(e) {
+    e.preventDefault();
+    console.log('new episode');
+    $.ajax({
+      method: 'POST',
+      url: '/api/shows/'+$(this).attr('data-id')+'/episodes',
+      data: $(this).serializeArray(),
+      success: newEpisodeSuccess,
+      error: newEpisodeSuccess
+    });
+  });
 
 //end of document ready
 });
@@ -42,9 +65,9 @@ $('#newShowForm').on('submit', function(e) {
 // Helper function to render all posts to views
 // Empties array and re-render each time posts data changes
 function render() {
-	$showsList.empty();
+	showsList.empty();
 	var showsHtml = template({ shows: allShows });
-	$showsList.append(showsHtml);
+	showsList.append(showsHtml);
 }
 
 function onSuccess(json) {
@@ -77,6 +100,41 @@ function newShowSuccess(json) {
 }
 
 function newShowError() {
-	console.log('Failed to load!');
-	$('#showTarget').append('Failed to load!');
+  console.log('Failed to load shows');
+  $('#showTarget').append('Failed to load shows.');
+}
+
+function deleteShowSuccess(json) {
+  var show = json;
+  console.log(json);
+  var showId = show._id;
+  console.log('delete show', showId);
+  // find the show with the correct ID and remove it from our allShows array
+  for(var index = 0; index < allAlbums.length; index++) {
+    if(allShows[index]._id === showId) {
+      allShows.splice(index, 1);
+      break;
+    }
+  }
+  render();
+}
+
+function deleteShowError() {
+  console.log('delete show error!');
+}
+
+function newEpisodeSuccess(json) {
+  var show = json;
+  var showId = album._id;
+  for(var index = 0; index < allShows.length; index++) {
+    if(allShows[index]._id === showId) {
+      allShow[index] = show;
+      break;
+    }
+  }
+  render();
+}
+
+function newEpisodeError() {
+  console.log('adding new episode error!');
 }
