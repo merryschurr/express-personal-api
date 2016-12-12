@@ -106,48 +106,48 @@ db.Shows.remove({}, function(err, shows) {
 //     });
 // });
 
-var actors_list = [
-{
-  name: 'Bruce Campbell',
-  showsMovies: ['MallBrats', 'Dark Ascension', 'The Escort', 'Evil Dead', 'Oz the Great and Powerful', 'Tar', 'Cars 2'],
-},
-{
-  name: 'Andrew Lincoln',
-  showsMovies: ['Made in Dagenham', 'Heartbreaker', 'Scenes of a Sexual Nature', 'Hey Good Looking!', 'These Foolish Things', 'Enduring Love', 'Love Actually'],
-},
-{
-  name: 'Peter Dinklage',
-  showsMovies: ['The Angry Birds Movie', 'Pixels', 'Desinty', 'X-Men: Days of Future Past', 'Knights of Badassdom', 'Ice Age: Continental Drift', 'I Love You Too'],
-},
-{
-  name: 'Thomas Middleditch',
-  showsMovies: ['Replicas', 'Sunspring', 'Going Under', 'Henchmen', 'Joshy', 'The Final Girls', 'The Bronze'],
-},
-{
-  name: 'Geena Davis',
-  showsMovies: ['Dont Talk to Irene', 'Marjorie Prime', 'Me Him Her', 'When Marnie was There', 'In a World...', 'Accidents Happen', 'Stuart Little 3: Call of the Wild'],
-}
-];
+// var actors_list = [
+// {
+//   name: 'Bruce Campbell',
+//   showsMovies: ['MallBrats', 'Dark Ascension', 'The Escort', 'Evil Dead', 'Oz the Great and Powerful', 'Tar', 'Cars 2'],
+// },
+// {
+//   name: 'Andrew Lincoln',
+//   showsMovies: ['Made in Dagenham', 'Heartbreaker', 'Scenes of a Sexual Nature', 'Hey Good Looking!', 'These Foolish Things', 'Enduring Love', 'Love Actually'],
+// },
+// {
+//   name: 'Peter Dinklage',
+//   showsMovies: ['The Angry Birds Movie', 'Pixels', 'Desinty', 'X-Men: Days of Future Past', 'Knights of Badassdom', 'Ice Age: Continental Drift', 'I Love You Too'],
+// },
+// {
+//   name: 'Thomas Middleditch',
+//   showsMovies: ['Replicas', 'Sunspring', 'Going Under', 'Henchmen', 'Joshy', 'The Final Girls', 'The Bronze'],
+// },
+// {
+//   name: 'Geena Davis',
+//   showsMovies: ['Dont Talk to Irene', 'Marjorie Prime', 'Me Him Her', 'When Marnie was There', 'In a World...', 'Accidents Happen', 'Stuart Little 3: Call of the Wild'],
+// }
+// ];
 
-db.Actors.remove({}, function(err, actors) {
-    console.log("removed all shows");
-    db.Actors.create(actors_list, function(err, newActors) {
-        console.log(newActors)
-        if (err) {
-            console.log(err);
-            return;
-        }
-        var newActors = new db.Actors({});
-        console.log("created " + newActors);
-        newActors.save(function(err, savedActors) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log("saved " + savedActors);
-        })
-        mongoose.connection.close();
-    })
-});
+// db.Actors.remove({}, function(err, actors) {
+//     console.log("removed all shows");
+//     db.Actors.create(actors_list, function(err, newActors) {
+//         console.log(newActors)
+//         if (err) {
+//             console.log(err);
+//             return;
+//         }
+//         var newActors = new db.Actors({});
+//         console.log("created " + newActors);
+//         newActors.save(function(err, savedActors) {
+//             if (err) {
+//                 return console.log(err);
+//             }
+//             console.log("saved " + savedActors);
+//         })
+//         mongoose.connection.close();
+//     })
+// });
 
 
 // db.Actors.remove({}, function(err, actors) {
