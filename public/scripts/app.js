@@ -1,6 +1,6 @@
 console.log("Sanity Check: JS is working!");
 var template;
-var $showsList;
+var showsList;
 var allShows = ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist'];
 
 
@@ -36,7 +36,7 @@ $(document).ready(function() {
 //       	error: newShowsError
 //     	});
 
-// 	$showsList.on('click', '.deleteBtn', function() {
+// 	showsList.on('click', '.deleteBtn', function() {
 // 	    console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
 // 	    $.ajax({
 // 	      method: 'DELETE',
@@ -46,7 +46,7 @@ $(document).ready(function() {
 // 	    });
 // 	});
 
-// 	 $showsList.on('submit', '#addEpisodeForm', function(e) {
+// 	 showsList.on('submit', '#addEpisodeForm', function(e) {
 // 	    e.preventDefault();
 // 	    console.log('new episode');
 // 	    $.ajax({
@@ -65,9 +65,9 @@ $(document).ready(function() {
 // Helper function to render all posts to views
 // Empties array and re-render each time posts data changes
 function render() {
-	$showsList.empty();
+	showsList.empty();
 	var showsHtml = template({ shows: allShows });
-	$showsList.append(showsHtml);
+	showsList.append(showsHtml);
 }
 
 function onSuccess(json) {
@@ -83,11 +83,7 @@ function onError(e) {
 
 function renderProfile(profile) {
 	var profileHTML =
-	'<h1>' + profile.name + '</h1>Github Profile:</br><img src="' +
-	profile.github_link + '">merryschurr</a></li><li>Current City: ' +
-	profile.current_city + '</li>' + '<li>Favorite Shows: <ul><li>' +
-	profile.favorite_shows + '</li></ul></li></ul>'; 
-
+	'<h1>' + profile.name + '</h1>Github Profile:</br><a href="' + profile.github_link + '"></a></li><li>Current City: ' + profile.current_city + '</li>' + '<li>Favorite Shows: <ul><li>' + profile.favorite_shows + '</li></ul></li></ul>'; 
 	$('#profileTarget').append(profileHTML)
 
 }

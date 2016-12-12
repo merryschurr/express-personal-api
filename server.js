@@ -175,7 +175,7 @@ app.delete('/api/shows/:id', function (req, res) {
 });
 
 // add episode to existing show
-app.post('/api/albums/:show_id/episode', function (req, res) {
+app.post('/api/actors/:show_id/episode', function (req, res) {
   var showId = req.params.show_id;
   db.Show.findById(showId)
   .populate('actor')
