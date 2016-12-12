@@ -25,39 +25,39 @@ $(document).ready(function() {
   });
 });
 
-$('#newShowForm').on('submit', function(e) {
-    e.preventDefault();
-    console.log('new shows serialized', $(this).serializeArray());
-    $.ajax({
-     	method: 'POST',
-      	url: '/api/shows',
-      	data: $(this).serializeArray(),
-      	success: newShowsSuccess,
-      	error: newShowsError
-    	});
+// $('#newShowForm').on('submit', function(e) {
+//     e.preventDefault();
+//     console.log('new shows serialized', $(this).serializeArray());
+//     $.ajax({
+//      	method: 'POST',
+//       	url: '/api/shows',
+//       	data: $(this).serializeArray(),
+//       	success: newShowsSuccess,
+//       	error: newShowsError
+//     	});
 
-	$showsList.on('click', '.deleteBtn', function() {
-	    console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
-	    $.ajax({
-	      method: 'DELETE',
-	      url: '/api/shows/'+$(this).attr('data-id'),
-	      success: deleteShowsSuccess,
-	      error: deleteShowsError
-	    });
-	});
+// 	$showsList.on('click', '.deleteBtn', function() {
+// 	    console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
+// 	    $.ajax({
+// 	      method: 'DELETE',
+// 	      url: '/api/shows/'+$(this).attr('data-id'),
+// 	      success: deleteShowsSuccess,
+// 	      error: deleteShowsError
+// 	    });
+// 	});
 
-	 $showsList.on('submit', '#addEpisodeForm', function(e) {
-	    e.preventDefault();
-	    console.log('new episode');
-	    $.ajax({
-	      method: 'POST',
-	      url: '/api/shows/'+$(this).attr('data-id')+'/episodes',
-	      data: $(this).serializeArray(),
-	      success: newEpisodeSuccess,
-	      error: newEpisodeSuccess
-	    });
-	});
-});
+// 	 $showsList.on('submit', '#addEpisodeForm', function(e) {
+// 	    e.preventDefault();
+// 	    console.log('new episode');
+// 	    $.ajax({
+// 	      method: 'POST',
+// 	      url: '/api/shows/'+$(this).attr('data-id')+'/episodes',
+// 	      data: $(this).serializeArray(),
+// 	      success: newEpisodeSuccess,
+// 	      error: newEpisodeSuccess
+// 	    });
+// 	});
+// });
 
 
 //end of document ready
@@ -97,11 +97,11 @@ function profileError(e) {
 	$('#profileTarget').append('Failed to load profile.');
 }
 
-function newShowsSuccess(json) {
-	$('#newShowForm input').val('');
-	allShows.push(json);
-	render();
-}
+// function newShowsSuccess(json) {
+// 	$('#newShowForm input').val('');
+// 	allShows.push(json);
+// 	render();
+// }
 
 function newShowsError() {
   console.log('Failed to load shows');
