@@ -1,11 +1,11 @@
 console.log("Sanity Check: JS is working!");
 var template;
-var showsList;
+var $showsList;
 var allShows = ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist'];
 
 $(document).ready(function(){
 
-	showsList = $('#showsTarget');
+	$showsList = $('#showsTarget');
 
   // compile handlebars template
 	var source = $('#shows-template').html();
@@ -37,7 +37,7 @@ $('#newShowForm').on('submit', function(e) {
     	});
 	});
 
-showsList.on('click', '.deleteBtn', function() {
+$showsList.on('click', '.deleteBtn', function() {
     console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
     $.ajax({
       method: 'DELETE',
@@ -47,7 +47,7 @@ showsList.on('click', '.deleteBtn', function() {
     });
   });
 
- showsList.on('submit', '#addEpisodeForm', function(e) {
+ $showsList.on('submit', '#addEpisodeForm', function(e) {
     e.preventDefault();
     console.log('new episode');
     $.ajax({
@@ -65,9 +65,9 @@ showsList.on('click', '.deleteBtn', function() {
 // Helper function to render all posts to views
 // Empties array and re-render each time posts data changes
 function render() {
-	showsList.empty();
+	$showsList.empty();
 	var showsHtml = template({ shows: allShows });
-	showsList.append(showsHtml);
+	$showsList.append(showsHtml);
 }
 
 function onSuccess(json) {
