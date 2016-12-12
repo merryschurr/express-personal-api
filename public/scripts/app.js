@@ -35,7 +35,7 @@ $('#newShowForm').on('submit', function(e) {
       	success: newShowsSuccess,
       	error: newShowsError
     	});
-	});
+});
 
 $showsList.on('click', '.deleteBtn', function() {
     console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
@@ -45,7 +45,7 @@ $showsList.on('click', '.deleteBtn', function() {
       success: deleteShowsSuccess,
       error: deleteShowsError
     });
-  });
+});
 
  $showsList.on('submit', '#addEpisodeForm', function(e) {
     e.preventDefault();
@@ -57,10 +57,9 @@ $showsList.on('click', '.deleteBtn', function() {
       success: newEpisodeSuccess,
       error: newEpisodeSuccess
     });
-  });
+});
 
 //end of document ready
-};
 
 // Helper function to render all posts to views
 // Empties array and re-render each time posts data changes
