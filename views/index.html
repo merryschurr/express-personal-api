@@ -50,7 +50,7 @@
           <b>Episodes</b>
           {{#each episodes}}
           {{name}}
-          {{/each}}
+          {{each}}
         <button type='button' name='button' class='deleteBtn btn btn-danger pull-right' data-id={{_id}}>Delete</button>
       </p>
       <form class='form-inline' id='addEpisodeForm' data-id={{_id}}>

@@ -143,6 +143,16 @@ app.get('/api/shows', function (req, res) {
       });
 });
 
+app.get('/api/shows/:id', function (req, res) {
+   // send all shows as JSON response
+  db.Shows.findById(req.pramas.id, (function(err, shows) {
+  // .populate('shows')
+  //   .exec(function(err, shows) {
+    if (err) { return console.log("index error: " + err); }
+      res.json(shows);
+      });
+});
+
 // create new show
 app.post('/api/shows', function (req, res) {
   var newShow = new db.Show({
@@ -184,7 +194,7 @@ app.delete('/api/shows/:id', function destroy(req, res) {
 });
 
 // add episode to existing show
-app.post('/api/actors/:show_id/episode', function (req, res) {
+app.post('/api/shows/:show_id/episode', function (req, res) {
   var showId = req.params.show_id;
   db.Show.findById(showId)
   .populate('actor')
