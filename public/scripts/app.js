@@ -1,7 +1,7 @@
 console.log("Sanity Check: JS is working!");
 var template;
 var showsList;
-var allShows = [];
+var allShows = ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist'];
 
 $(document).ready(function(){
 
