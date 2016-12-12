@@ -4,6 +4,7 @@ var personal_info = [
 {
  	name: 'Merry Schurr',
   	github_link: 'https://github.com/merryschurr/express-personal-api/blob/master/README.md',
+    base_url: "https://infinite-oasis-61785.herokuapp.com/"
    	current_city: 'Denver',
    	favorite_shows: ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist']
 }];

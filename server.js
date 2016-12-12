@@ -118,9 +118,6 @@ app.post('/api/albums/:show_id/episode', function (req, res) {
   });
 });
 
-
-
-
 //HTML Endpoints
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
@@ -132,7 +129,7 @@ app.get('/api', function api_index(req, res) {
     woops_i_has_forgot_to_document_all_my_endpoints: false, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentation_url: "https://github.com/merryschurr/express-personal-api/blob/master/README.md", // CHANGE ME
-    base_url: "https://infinite-oasis-61785.herokuapp.com/", // CHANGE ME
+    base_url: "https://infinite-oasis-61785.herokuapp.com", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
