@@ -27,13 +27,13 @@ $(document).ready(function(){
 
 $('#newShowForm').on('submit', function(e) {
     e.preventDefault();
-    console.log('new show serialized', $(this).serializeArray());
+    console.log('new shows serialized', $(this).serializeArray());
     $.ajax({
      	method: 'POST',
       	url: '/api/shows',
       	data: $(this).serializeArray(),
-      	success: newShowSuccess,
-      	error: newShowError
+      	success: newShowsSuccess,
+      	error: newShowsError
     	});
 	});
 
@@ -42,8 +42,8 @@ $showsList.on('click', '.deleteBtn', function() {
     $.ajax({
       method: 'DELETE',
       url: '/api/shows/'+$(this).attr('data-id'),
-      success: deleteShowSuccess,
-      error: deleteShowError
+      success: deleteShowsSuccess,
+      error: deleteShowsError
     });
   });
 
@@ -93,25 +93,25 @@ function profileError(e) {
 	$('#profileTarget').append('Failed to load profile.');
 }
 
-function newShowSuccess(json) {
+function newShowsSuccess(json) {
 	$('#newShowForm input').val('');
 	allShows.push(json);
 	render();
 }
 
-function newShowError() {
+function newShowsError() {
   console.log('Failed to load shows');
   $('#showTarget').append('Failed to load shows.');
 }
 
-function deleteShowSuccess(json) {
-  var show = json;
+function deleteShowsSuccess(json) {
+  var shows = json;
   console.log(json);
-  var showId = show._id;
-  console.log('delete show', showId);
-  // find the show with the correct ID and remove it from our allShows array
-  for(var index = 0; index < allAlbums.length; index++) {
-    if(allShows[index]._id === showId) {
+  var showsId = shows._id;
+  console.log('delete shows', showsId);
+  // find the shows with the correct ID and remove it from our allShows array
+  for(var index = 0; index < allShows.length; index++) {
+    if(allShows[index]._id === showsId) {
       allShows.splice(index, 1);
       break;
     }
@@ -119,16 +119,16 @@ function deleteShowSuccess(json) {
   render();
 }
 
-function deleteShowError() {
-  console.log('delete show error!');
+function deleteShowsError() {
+  console.log('delete shows error!');
 }
 
 function newEpisodeSuccess(json) {
-  var show = json;
-  var showId = album._id;
+  var shows = json;
+  var showsId = shows._id;
   for(var index = 0; index < allShows.length; index++) {
-    if(allShows[index]._id === showId) {
-      allShow[index] = show;
+    if(allShows[index]._id === showsId) {
+      allShows[index] = shows;
       break;
     }
   }

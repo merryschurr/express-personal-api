@@ -6,11 +6,11 @@ var EpisodeSchema = new Schema({
   });
  
 var ShowsSchema = new Schema({
-  title: String,
   shows: {
     type: Schema.Types.ObjectId,
-    ref: 'Actors'
+    ref: 'Shows'
   },
+    title: String,
     actors: String,
     released: String,
     episode: String
@@ -20,4 +20,4 @@ var Shows = mongoose.model('Shows', ShowsSchema);
  
 module.exports = Shows;
 
- 
+

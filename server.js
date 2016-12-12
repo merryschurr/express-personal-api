@@ -126,7 +126,6 @@ app.get('/', function homepage(req, res) {
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
   res.json({
-    woops_i_has_forgot_to_document_all_my_endpoints: false, // CHANGE ME ;)
     message: "Welcome to my personal api! Here's what you need to know!",
     documentation_url: "https://github.com/merryschurr/express-personal-api/blob/master/README.md", // CHANGE ME
     base_url: "https://infinite-oasis-61785.herokuapp.com", // CHANGE ME
