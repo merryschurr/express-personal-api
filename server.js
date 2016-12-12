@@ -56,32 +56,32 @@ shows.push({
             episode: ['Season 1']
           });
 
-var actors = [];
-actors.push({
-            _id: 6,
-            name: 'Bruce Campbell',
-            showsMovies: ['MallBrats', 'Dark Ascension', 'The Escort', 'Evil Dead', 'Oz the Great and Powerful', 'Tar', 'Cars 2'],
-            });
-actors.push({
-            _id: 7,
-            name: 'Andrew Lincoln',
-            showsMovies: ['Made in Dagenham', 'Heartbreaker', 'Scenes of a Sexual Nature', 'Hey Good Looking!', 'These Foolish Things', 'Enduring Love', 'Love Actually'],
-            });
-actors.push({
-            _id: 8,
-            name: 'Peter Dinklage',
-            showsMovies: ['The Angry Birds Movie', 'Pixels', 'Desinty', 'X-Men: Days of Future Past', 'Knights of Badassdom', 'Ice Age: Continental Drift', 'I Love You Too'],
-            });
-actors.push({
-            _id: 9,
-            name: 'Thomas Middleditch',
-            showsMovies: ['Replicas', 'Sunspring', 'Going Under', 'Henchmen', 'Joshy', 'The Final Girls', 'The Bronze'],
-            });
-actors.push({
-            _id: 10,
-            name: 'Geena Davis',
-            showsMovies: ['Dont Talk to Irene', 'Marjorie Prime', 'Me Him Her', 'When Marnie was There', 'In a World...', 'Accidents Happen', 'Stuart Little 3: Call of the Wild'],
-            });
+// var actors = [];
+// actors.push({
+//             _id: 6,
+//             name: 'Bruce Campbell',
+//             showsMovies: ['MallBrats', 'Dark Ascension', 'The Escort', 'Evil Dead', 'Oz the Great and Powerful', 'Tar', 'Cars 2'],
+//             });
+// actors.push({
+//             _id: 7,
+//             name: 'Andrew Lincoln',
+//             showsMovies: ['Made in Dagenham', 'Heartbreaker', 'Scenes of a Sexual Nature', 'Hey Good Looking!', 'These Foolish Things', 'Enduring Love', 'Love Actually'],
+//             });
+// actors.push({
+//             _id: 8,
+//             name: 'Peter Dinklage',
+//             showsMovies: ['The Angry Birds Movie', 'Pixels', 'Desinty', 'X-Men: Days of Future Past', 'Knights of Badassdom', 'Ice Age: Continental Drift', 'I Love You Too'],
+//             });
+// actors.push({
+//             _id: 9,
+//             name: 'Thomas Middleditch',
+//             showsMovies: ['Replicas', 'Sunspring', 'Going Under', 'Henchmen', 'Joshy', 'The Final Girls', 'The Bronze'],
+//             });
+// actors.push({
+//             _id: 10,
+//             name: 'Geena Davis',
+//             showsMovies: ['Dont Talk to Irene', 'Marjorie Prime', 'Me Him Her', 'When Marnie was There', 'In a World...', 'Accidents Happen', 'Stuart Little 3: Call of the Wild'],
+//             });
 
 /**********
  * ROUTES *

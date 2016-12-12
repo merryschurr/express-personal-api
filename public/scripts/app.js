@@ -18,11 +18,11 @@ $(document).ready(function() {
   	});
   });
 
-  $.get('api/actors').success(function(actors) {
-  	shows.forEach(function(actors) {
-  		renderActors(actors);
-  	});
-  });
+  // $.get('api/actors').success(function(actors) {
+  // 	shows.forEach(function(actors) {
+  // 		renderActors(actors);
+  // 	});
+  // });
 });
 
 // $('#newShowForm').on('submit', function(e) {
