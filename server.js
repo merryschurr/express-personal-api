@@ -115,14 +115,23 @@ app.get('/api', function api_index(req, res) {
 
 app.get('/api/profile', function (req, res) {
    // send all profile as JSON response
-  db.Profile.find().populate('profile')
-    .exec(function(err, profile) {
+  db.Profile.find({}, function(err, profile) {
+  // .populate('profile')
+    // .exec(function(err, profile) {
     if (err) {
       return console.log('index error: ' + err);
       }
       res.json(profile);
       });
 });
+
+app.post('/api/profile', function makePro(req, res) {
+    var profile = new db.Profile ();
+    profile.name = req.body.name;
+    profile.current_city = req.body.current_city;
+    profile.save();
+    res.json("Created" + profile);
+})
   
   // get all shows
 app.get('/api/shows', function (req, res) {
@@ -138,7 +147,7 @@ app.get('/api/shows', function (req, res) {
 app.post('/api/shows', function (req, res) {
   var newShow = new db.Show({
     tile: req.body.title,
-    releaseDate: req.body.releaseDate,
+    released: req.body.released,
   });
 
   // create actor from req.body
@@ -164,7 +173,7 @@ app.post('/api/shows', function (req, res) {
 });
 
 // delete show
-app.delete('/api/shows/:id', function (req, res) {
+app.delete('/api/shows/:id', function destroy(req, res) {
   // get show id from url params (`req.params`)
   console.log('shows delete', req.params);
   var showId = req.params.id;

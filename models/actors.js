@@ -2,10 +2,10 @@ var mongoose = require('mongoose'),
   	Schema = mongoose.Schema;
  
 var ActorsSchema = new Schema({
-	actors: {
-     	type: Schema.Types.ObjectId,
-     	ref: 'Actors'
-   	},
+	// actors: {
+ //     	type: Schema.Types.ObjectId,
+ //     	ref: 'Actors'
+ //   	},
   		name: String,
   		showsMovies: String
 });

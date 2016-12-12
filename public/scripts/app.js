@@ -81,6 +81,8 @@ function onError(e) {
 }
 
 
+
+// profile
 function renderProfile(profile) {
 	var profileHTML =
 	'<h1>' + profile.name + '</h1>Github Profile:</br><a href="' + profile.github_link + '"></a></li><li>Current City: ' + profile.current_city + '</li>' + '<li>Favorite Shows: <ul><li>' + profile.favorite_shows + '</li></ul></li></ul>'; 

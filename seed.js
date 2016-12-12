@@ -6,23 +6,43 @@ var personal_info = [
 {
 	name: 'Merry Schurr',
 	github_link: 'https://github.com/merryschurr/express-personal-api/blob/master/README.md',
-  base_url: "https://infinite-oasis-61785.herokuapp.com"
+  base_url: "https://infinite-oasis-61785.herokuapp.com",
  	current_city: 'Denver',
- 	favorite_shows: ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist']
+ 	// favorite_shows: ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist']
 }];
 
-db.Profile.remove({}, function(err, profile) {
-  console.log('remove all profile information');
-  db.Profile.create(personal_info, function(err, profile){
-    if (err) {
-      console.log(err);
-      return;
-    }
-    console.log(profile);
-    console.log("profile");
-    console.log("created", profile.length, "profile");
-    process.exit();
-  });
+// db.Profile.remove({}, function(err, profile) {
+//   console.log('remove all profile information');
+//   db.Profile.create(personal_info, function(err, profile){
+//     if (err) {
+//       console.log(err);
+//       return;
+//     }
+//     console.log(profile);
+//     console.log("profile");
+//     console.log("created", profile.length, "profile");
+//     process.exit();
+//   });
+// });
+
+db.Profile.remove({}, function(err, profiles) {
+    console.log("removed all profiles");
+    db.Profile.create(personal_info, function(err, newProfile) {
+        console.log(newProfile)
+        if (err) {
+            console.log(err);
+            return;
+        }
+        var newProfile = new db.Profile({});
+        console.log("created " + newProfile);
+        newProfile.save(function(err, savedProfile) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("saved " + savedProfile);
+        })
+        mongoose.connection.close();
+    })
 });
 
 var shows_list = [
@@ -57,14 +77,34 @@ var shows_list = [
   episode: ['Season 1']
 }];
 
-db.Shows.remove({}, function(err, shows){
-  console.log('removed all shows');
-  shows_list.forEach(function (showsData) {
-    var show = new db.Show({
-      title: showData.title,
-      released: showData.releaed
-    });
+db.Shows.remove({}, function(err, shows) {
+    console.log("removed all shows");
+    db.Shows.create(shows_list, function(err, newShows) {
+        console.log(newShows)
+        if (err) {
+            console.log(err);
+            return;
+        }
+        var newShows = new db.Shows({});
+        console.log("created " + newShows);
+        newShows.save(function(err, savedShows) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("saved " + savedShows);
+        })
+        mongoose.connection.close();
+    })
 });
+
+// db.Shows.remove({}, function(err, shows){
+//   console.log('removed all shows');
+//   shows_list.forEach(function (showsData) {
+//     var show = new db.Show({
+//       title: showData.title,
+//       released: showData.releaed
+//     });
+// });
 
 var actors_list = [
 {
@@ -89,33 +129,53 @@ var actors_list = [
 }
 ];
 
-
 db.Actors.remove({}, function(err, actors) {
-console.log('removed all actors');
-db.Actor.create(actors_list, function(err, actors){
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log("actors");
-  console.log("created", actors.length, "actors");
-  process.exit();
-  });
+    console.log("removed all shows");
+    db.Actors.create(actors_list, function(err, newActors) {
+        console.log(newActors)
+        if (err) {
+            console.log(err);
+            return;
+        }
+        var newActors = new db.Actors({});
+        console.log("created " + newActors);
+        newActors.save(function(err, savedActors) {
+            if (err) {
+                return console.log(err);
+            }
+            console.log("saved " + savedActors);
+        })
+        mongoose.connection.close();
+    })
 });
 
-db.Actors.findOne({name: showsData.actor}, function (err, foundactor) {
-  console.log('found actor ' + foundactor.name + ' for show ' + show.title);
-  if (err) {
-    console.log(err);
-    return;
-  }
-  show.actor = foundactor;
-  show.save(function(err, savedshow){
-    if (err) {
-      return console.log(err);
-    }
-    console.log('saved ' + savedshow.title + ' by ' + foundactor.name);
-    });
-  });
-});
+
+// db.Actors.remove({}, function(err, actors) {
+// console.log('removed all actors');
+// db.Actor.create(actors_list, function(err, actors){
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   console.log("actors");
+//   console.log("created", actors.length, "actors");
+//   process.exit();
+//   });
+// });
+
+// db.Actors.findOne({name: showsData.actor}, function (err, foundactor) {
+//   console.log('found actor ' + foundactor.name + ' for show ' + show.title);
+//   if (err) {
+//     console.log(err);
+//     return;
+//   }
+//   show.actor = foundactor;
+//   show.save(function(err, savedshow){
+//     if (err) {
+//       return console.log(err);
+//     }
+//     console.log('saved ' + savedshow.title + ' by ' + foundactor.name);
+//     });
+//   });
+// });
 
