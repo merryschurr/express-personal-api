@@ -3,26 +3,26 @@ var template;
 var $showsList;
 var allShows = ['Ash vs Evil Dead', 'Walking Dead', 'Game of Thrones', 'Silicon Valley', 'The Exorcist'];
 
-$(document).ready(function(){
 
-	$showsList = $('#showsTarget');
+$(document).ready(function() {
+  
+  $.get('api/profile').success(function(profile) {
+    profile.forEach(function(profile) {
+      renderProfile(profile);
+    });
+  });
 
-  // compile handlebars template
-	var source = $('#shows-template').html();
-	template = Handlebars.compile(source);
+  $.get('api/shows').success(function(shows) {
+  	shows.forEach(function(shows) {
+  		renderShows(shows);
+  	});
+  });
 
-	$.ajax({
-	    method: 'GET',
-	    url: '/api/shows', 
-	    success: onSuccess,
-	    error: onError
-});
-
-	$.ajax({
-	    method: 'GET',
-	    url: '/api/profile',
-	    success: profileSuccess,
-	    error: profileError
+  $.get('api/actors').success(function(actors) {
+  	shows.forEach(function(actors) {
+  		renderActors(actors);
+  	});
+  });
 });
 
 $('#newShowForm').on('submit', function(e) {
@@ -60,7 +60,7 @@ $showsList.on('click', '.deleteBtn', function() {
   });
 
 //end of document ready
-});
+};
 
 // Helper function to render all posts to views
 // Empties array and re-render each time posts data changes
