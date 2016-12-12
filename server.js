@@ -8,32 +8,84 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// serve static files from public folder
+app.use(express.static(__dirname + '/public'));
+
 /************
  * DATABASE *
  ************/
 
 var db = require('./models');
 
+// hard-coded data
+
+var shows = [];
+shows.push({
+            _id: 1,
+            title: 'Ash vs Evil Dead',
+            actor: 'Bruce Campbell',
+            released: 'October 31, 2015',
+            episode: ['Season 1', 'Season 2']
+          });
+shows.push({
+            _id: 2,
+            title: 'Walking Dead',
+            actor: 'Andrew Lincoln',
+            released: 'October 31, 2010',
+            episode: ['Season 1', 'Season 2', 'Season 3', 'Season 4', 'Season 5', 'Season 6', 'Season 7']
+          });
+shows.push({
+            _id: 3,
+            title: 'Game of Thrones',
+            actor: 'Peter Dinklage',
+            released: 'April 17, 2011',
+            episode: ['Season 1', 'Season 2', 'Season 3', 'Season 4', 'Season 5', 'Season 6']
+          });
+shows.push({
+            _id: 4,
+            title: 'Silicon Valley',
+            actor: 'Thomas Middleditch',
+            released: 'April 6, 2014',
+            episode: ['Season 1', 'Season 2']
+          });
+shows.push({
+            _id: 5,
+            title: 'The Exorcist',
+            actor: 'Geena Davis',
+            released: 'September 23, 2016',
+            episode: ['Season 1']
+          });
+
+
 /**********
  * ROUTES *
  **********/
 
-// Serve static files from the `/public` directory:
-// i.e. `/images`, `/scripts`, `/styles`
-app.use(express.static('public'));
-
-/*
- * HTML Endpoints
- */
-
+//HTML Endpoints
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
-
 /*
  * JSON API Endpoints
  */
+
+app.get('/api', function api_index(req, res) {
+  // TODO: Document all your api endpoints below
+  res.json({
+    message: "Welcome to my personal api! Here's what you need to know!",
+    documentation_url: "https://github.com/merryschurr/express-personal-api", // CHANGE ME
+    base_url: "https://infinite-oasis-61785.herokuapp.com", // CHANGE ME
+    endpoints: [
+      {method: "GET", path: "/api", description: "Describes all available endpoints"},
+      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
+      {method: "POST", path: "/api/shows", description: "Favorite TV shows"}, // CHANGE ME
+      {method: "GET", path: "/api/shows", description: "Information about my favorite shows"},
+      {method: "DELETE", path: "/api/shows", description: "Delete a show from my list"},
+      {method: "PUT", path: "/api/shows", description: "Correction needed?"}
+    ]
+  })
+});
 
 app.get('/api/profile', function (req, res) {
    // send all profile as JSON response
@@ -116,28 +168,6 @@ app.post('/api/albums/:show_id/episode', function (req, res) {
       res.status(201).json(foundShow);
     }
   });
-});
-
-//HTML Endpoints
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
-});
-
-app.get('/api', function api_index(req, res) {
-  // TODO: Document all your api endpoints below
-  res.json({
-    message: "Welcome to my personal api! Here's what you need to know!",
-    documentation_url: "https://github.com/merryschurr/express-personal-api/blob/master/README.md", // CHANGE ME
-    base_url: "https://infinite-oasis-61785.herokuapp.com", // CHANGE ME
-    endpoints: [
-      {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/shows", description: "Favorite TV shows"}, // CHANGE ME
-      {method: "GET", path: "/api/shows", description: "Information about my favorite shows"},
-      {method: "DELETE", path: "/api/shows", description: "Delete a show from my list"},
-      {method: "PUT", path: "/api/shows", description: "Correction needed?"}
-    ]
-  })
 });
 
 /**********
