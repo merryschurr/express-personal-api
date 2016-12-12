@@ -35,29 +35,30 @@ $('#newShowForm').on('submit', function(e) {
       	success: newShowsSuccess,
       	error: newShowsError
     	});
+
+	$showsList.on('click', '.deleteBtn', function() {
+	    console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
+	    $.ajax({
+	      method: 'DELETE',
+	      url: '/api/shows/'+$(this).attr('data-id'),
+	      success: deleteShowsSuccess,
+	      error: deleteShowsError
+	    });
+	});
+
+	 $showsList.on('submit', '#addEpisodeForm', function(e) {
+	    e.preventDefault();
+	    console.log('new episode');
+	    $.ajax({
+	      method: 'POST',
+	      url: '/api/shows/'+$(this).attr('data-id')+'/episodes',
+	      data: $(this).serializeArray(),
+	      success: newEpisodeSuccess,
+	      error: newEpisodeSuccess
+	    });
+	});
 });
 
-$showsList.on('click', '.deleteBtn', function() {
-    console.log('clicked delete button to', '/api/shows/'+$(this).attr('data-id'));
-    $.ajax({
-      method: 'DELETE',
-      url: '/api/shows/'+$(this).attr('data-id'),
-      success: deleteShowsSuccess,
-      error: deleteShowsError
-    });
-});
-
- $showsList.on('submit', '#addEpisodeForm', function(e) {
-    e.preventDefault();
-    console.log('new episode');
-    $.ajax({
-      method: 'POST',
-      url: '/api/shows/'+$(this).attr('data-id')+'/episodes',
-      data: $(this).serializeArray(),
-      success: newEpisodeSuccess,
-      error: newEpisodeSuccess
-    });
-});
 
 //end of document ready
 
