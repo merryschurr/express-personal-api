@@ -145,7 +145,7 @@ app.get('/api/shows', function (req, res) {
 
 app.get('/api/shows/:id', function (req, res) {
    // send all shows as JSON response
-  db.Shows.findById(req.pramas.id, function(err, shows) {
+  db.Shows.findById(req.params.id, function(err, shows) {
   // .populate('shows')
   //   .exec(function(err, shows) {
     if (err) { return console.log("index error: " + err); }
