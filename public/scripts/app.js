@@ -80,12 +80,16 @@ function onError(e) {
 	$('#showsTarget').append('Failed to load shows.');
 }
 
-function profileSuccess(json) {
-$('#profileTarget').append(
-	'<h1>' + json[0].name + '</h1>Github Profile:</br><img src="' +
-	json[0].github_link + '">merryschurr</a></li><li>Current City: ' +
-	json[0].current_city + '</li>' + '<li>Favorite Shows: <ul><li>' +
-	json[0].favorite_shows.join('; ') + '</li></ul></li></ul>'); 
+
+function renderProfile(profile) {
+	var profileHTML =
+	'<h1>' + profile.name + '</h1>Github Profile:</br><img src="' +
+	profile.github_link + '">merryschurr</a></li><li>Current City: ' +
+	profile.current_city + '</li>' + '<li>Favorite Shows: <ul><li>' +
+	profile.favorite_shows + '</li></ul></li></ul>'; 
+
+	$('#profileTarget').append(profileHTML)
+
 }
 
 function profileError(e) {
