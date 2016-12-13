@@ -105,8 +105,9 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Data about me"}, // CHANGE ME
-      {method: "POST", path: "/api/shows", description: "Favorite TV shows"}, // CHANGE ME
+      {method: "POST", path: "/api/profile", description: "Profile"}, // CHANGE ME
       {method: "GET", path: "/api/shows", description: "Information about my favorite shows"},
+      {method: "POST", path: "/api/shows", description: "Favorite TV shows"}, // CHANGE ME
       {method: "DELETE", path: "/api/shows", description: "Delete a show from my list"},
       {method: "PUT", path: "/api/shows", description: "Correction needed?"}
     ]
@@ -131,7 +132,7 @@ app.post('/api/profile', function makePro(req, res) {
     profile.current_city = req.body.current_city;
     profile.save();
     res.json("Created" + profile);
-})
+});
   
   // get all shows
 app.get('/api/shows', function (req, res) {
